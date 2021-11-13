@@ -9,22 +9,28 @@ import { StoreModule } from "@ngrx/store";
 import * as fromProductState from './store';
 import { EffectsModule } from '@ngrx/effects';
 import { ProductEffects } from './store/product.effects';
+import { ProductComponent } from "./components/product/product.component"
 
 @NgModule({
   declarations: [
     ProductListComponent,
+    ProductComponent,
     YesNoPipe
   ],
   imports: [
     CommonModule,
     FormsModule,
     ProductsRoutingModule,
-    StoreModule.forFeature(fromProductState.productStateFeatureKey, fromProductState.reducers, { metaReducers: fromProductState.metaReducers }),
+    StoreModule.forFeature(
+      fromProductState.productStateFeatureKey,
+      fromProductState.reducers, { metaReducers: fromProductState.metaReducers }
+    ),
     EffectsModule.forFeature([ProductEffects])
   ],
   providers: [ProductService],
   exports: [
-    ProductListComponent
+    ProductListComponent,
+    ProductComponent
   ]
 })
 export class ProductsModule { }

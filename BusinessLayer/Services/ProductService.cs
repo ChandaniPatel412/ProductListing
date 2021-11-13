@@ -25,5 +25,10 @@ namespace BusinessLayer.Services
         {
             return _productRepository.GetProductsAsync().Result;
         }
+
+        public Product GetProduct(int productId)
+        {
+            return _productRepository.GetProductAsync(productId).Result;
+        }
     }
 }

@@ -18,7 +18,10 @@ export interface ProductState extends EntityState<Product> {
   error: any;
 }
 
-export const adapter: EntityAdapter<Product> = createEntityAdapter<Product>();
+export const adapter: EntityAdapter<Product> = createEntityAdapter<Product>({
+  selectId: (product: Product) => product.productId,
+  sortComparer: null,
+});
 
 export const initialState = adapter.getInitialState({
   error: undefined

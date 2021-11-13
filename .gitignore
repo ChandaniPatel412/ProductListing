@@ -7,3 +7,5 @@
 /BusinessLayer/obj
 /DataAccess/bin/Debug/net5.0
 /DataAccess/obj
+/BusinessLayer/bin/Release/net5.0
+/DataAccess/bin/Release/net5.0

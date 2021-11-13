@@ -10,5 +10,6 @@ namespace BusinessLayer.IRepositories
     public interface IProductRepository
     {
         Task<List<Product>> GetProductsAsync();
+        Task<Product> GetProductAsync(int productId);
     }
 }

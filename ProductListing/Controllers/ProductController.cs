@@ -28,5 +28,15 @@ namespace ProductListing.Controllers
             var result = _productService.GetProducts();
             return Ok(result);
         }
+
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            var result = _productService.GetProduct(id);
+            if (result == null)
+                return NotFound();
+            return Ok(result);
+        }
+
     }
 }

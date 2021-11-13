@@ -1,0 +1,38 @@
+<div class="row justify-content-center">
+  <div class="col-8 mt-4"
+       *ngIf="product$ | async as product">
+    <h4>Product Detail</h4>
+    <div class="row mt-4">
+      <div class="col-md-5 col-lg-7">
+
+        <div class=" mt-4">
+          <div>
+            <p>Price: ${{product.price}}</p>
+          </div>
+          <div>
+            <p>
+              Is Published: {{product.isPublished | yesNo}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-md-5 col-lg-7">
+        <div class=" mt-4">
+            <h5 class="card-title">{{product.name}}</h5>
+            <p class="card-text">
+              {{product.description}}
+            </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mt-4">
+    <button class="btn btn-primary"
+            [routerLink]="['/product/list']"
+            routerLinkActive="router-link-active">
+      <i class="fas fa-arrow-left"></i> Back To List
+    </button>
+  </div>
+</div>

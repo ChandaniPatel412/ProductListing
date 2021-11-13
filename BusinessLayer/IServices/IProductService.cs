@@ -10,5 +10,6 @@ namespace BusinessLayer.IServices
     public interface IProductService
     {
         List<Product> GetProducts();
+        Product GetProduct(int productId);
     }
 }

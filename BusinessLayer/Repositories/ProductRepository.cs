@@ -25,5 +25,10 @@ namespace BusinessLayer.Repositories
         {
             return await _context.Products.ToListAsync();
         }
+
+        public async Task<Product> GetProductAsync(int productId)
+        {
+            return await _context.Products.FindAsync(productId);
+        }
     }
 }

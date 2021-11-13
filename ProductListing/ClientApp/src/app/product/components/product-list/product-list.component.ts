@@ -6,13 +6,15 @@ import { ProductState, selectProducts } from "../../store";
 import { Store, select } from "@ngrx/store";
 import * as fromActions from "../../store/product.actions";
 import { Observable } from "rxjs";
+import { async } from "@angular/core/testing";
 
 @Component({
   selector: 'app-product-list',
-  templateUrl: './product-list.component.html'
+  templateUrl: './product-list.component.html',
+  styleUrls: ["./product-list.component.scss"]
 })
-export class ProductListComponent {
-  //products: Product[] = [];
+export class ProductListComponent implements OnInit {
+  count: number = 0;
   products$: Observable<Product[]>;
 
   constructor(

@@ -6,7 +6,10 @@ var environment_1 = require("../../../environments/environment");
 var product_actions_1 = require("./product.actions");
 var entity_1 = require("@ngrx/entity");
 exports.productStateFeatureKey = "productState";
-exports.adapter = (0, entity_1.createEntityAdapter)();
+exports.adapter = (0, entity_1.createEntityAdapter)({
+    selectId: function (product) { return product.productId; },
+    sortComparer: null,
+});
 exports.initialState = exports.adapter.getInitialState({
     error: undefined
 });
