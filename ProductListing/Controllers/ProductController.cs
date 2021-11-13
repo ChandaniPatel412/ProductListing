@@ -25,16 +25,8 @@ namespace ProductListing.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            try
-            {
-                var result = _productService.GetProducts();
-                return Ok(result);
-            }
-            catch(Exception ex)
-            {
-                _logger.LogError("Error Product/Get -> Get API Error Details: {0}", ex);
-                return StatusCode(500, "Internal Server Error");
-            }
+            var result = _productService.GetProducts();
+            return Ok(result);
         }
     }
 }

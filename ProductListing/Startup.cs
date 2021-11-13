@@ -11,6 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ProductListing.Configuration;
 using System.Text.Json.Serialization;
+using Serilog;
+using Serilog.Context;
+using ProductListing.Extensions;
 
 namespace ProductListing
 {
@@ -54,6 +57,8 @@ namespace ProductListing
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseSerilogRequestLogging();
+            app.ConfigureExceptionHandler();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
