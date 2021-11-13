@@ -3,24 +3,35 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
+import { HomeComponent } from "./pages/home/home.component";
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { ProductListingComponent } from './product-listing/product-listing.component';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers'
+import { AppRoutingModule } from './app-routing.module';
+import { EffectsModule } from '@ngrx/effects';
+import { AppEffects } from './app.effects';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
-    ProductListingComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot([
-      { path: '', component: ProductListingComponent },
-    ])
+    AppRoutingModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true
+      }
+    }),
+    EffectsModule.forRoot([AppEffects]),
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

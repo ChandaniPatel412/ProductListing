@@ -1,8 +1,6 @@
 <h1 id="tableLabel">Products</h1>
 
-<p *ngIf="!products"><em>Loading...</em></p>
-
-<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="products">
+<table class='table table-striped' aria-labelledby="tableLabel">
   <thead>
     <tr>
       <th>Name</th>
@@ -12,11 +10,11 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let product of products">
+    <tr *ngFor="let product of products$ | async">
       <td>{{ product.name }}</td>
-      <td>{{ product.price }}</td>
+      <td>${{ product.price }}</td>
       <td>{{ product.description }}</td>
-      <td>{{ product.isPublished }}</td>
+      <td>{{ product.isPublished | yesNo }}</td>
     </tr>
   </tbody>
 </table>
