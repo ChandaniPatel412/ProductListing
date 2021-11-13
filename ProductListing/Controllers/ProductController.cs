@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BusinessLayer.IServices;
+using DataAccess.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -8,35 +10,31 @@ using System.Threading.Tasks;
 namespace ProductListing.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class ProductController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
+        private readonly IProductService _productService;
         private readonly ILogger<ProductController> _logger;
 
-        public ProductController(ILogger<ProductController> logger)
+        public ProductController(IProductService productService, ILogger<ProductController> logger)
         {
+            _productService = productService;
             _logger = logger;
         }
 
         [HttpGet]
-        public IEnumerable<Product> Get()
+        public IActionResult Get()
         {
-            Product[] productArray = new Product[1]
+            try
             {
-                new Product(){
-                    ProductId = 1,
-                    Name = "Grand Theft Auto V - PlayStation 3",
-                    Description = "Comes in original case with manual. Game is in excellent condition.",
-                    Price = Convert.ToDecimal(19.99),
-                    IsPublished = true
-                }
-            };
-            return productArray;
+                var result = _productService.GetProducts();
+                return Ok(result);
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError("Error Product/Get -> Get API Error Details: {0}", ex);
+                return StatusCode(500, "Internal Server Error");
+            }
         }
     }
 }

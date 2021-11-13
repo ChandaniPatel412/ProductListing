@@ -3,3 +3,7 @@
 ################################################################################
 
 /.vs/ProductListing
+/BusinessLayer/bin/Debug/net5.0
+/BusinessLayer/obj
+/DataAccess/bin/Debug/net5.0
+/DataAccess/obj

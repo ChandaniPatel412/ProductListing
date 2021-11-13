@@ -1,10 +1,16 @@
+using BusinessLayer.IRepositories;
+using BusinessLayer.Repositories;
+using DataAccess.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ProductListing.Configuration;
+using System.Text.Json.Serialization;
 
 namespace ProductListing
 {
@@ -26,6 +32,13 @@ namespace ProductListing
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddServices();
+
+            //services.AddControllers().AddJsonOptions(x =>
+            //    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+
+            services.AddDbContext<ProductsDBContext>(options => options.UseInMemoryDatabase(databaseName: "Products"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
